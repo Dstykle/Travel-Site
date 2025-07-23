@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", () => {
       outbound_date: departure,
     };
 
-    const res = await fetch("http://localhost:3000/flights", {
+    const res = await fetch("/api/flights", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
