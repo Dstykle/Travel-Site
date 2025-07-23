@@ -1,0 +1,26 @@
+{
+  "name": "mytravel",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "collaborate in groups of five or six to create a  travel website that aims to rival industry leaders like Trip Advisor, Airbnb and Lonely Planet. The website will focus on aiding in destination exploration, trip planning, and activity discovery. Develop a user-centric platform and effectively, using Design Thinking techniques while leveraging Git and Github throughout the process.",
+  "dependencies": {
+    "axios": "^1.11.0",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.0",
+    "express": "^5.1.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Dstykle/Travel-Site.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Dstykle/Travel-Site/issues"
+  },
+  "homepage": "https://github.com/Dstykle/Travel-Site#readme"
+}
