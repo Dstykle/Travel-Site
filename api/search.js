@@ -5,12 +5,24 @@ const amadeus = new Amadeus({
   clientSecret: process.env.AMADEUS_CLIENT_SECRET,
 });
 
-// Create serverless function handler for flight search
 export default async function handler(req, res) {
-  const { origin, destination, date, adult, child, currencyCode = 'USD' } = req.query;
+  if (req.method !== 'GET') {
+    return res.status(405).json({ error: 'Method not allowed' });
+  }
+
+  const {
+    origin,
+    destination,
+    date,
+    adult = 1,
+    child = 0,
+    currencyCode = 'USD',
+  } = req.query;
 
   if (!origin || !destination || !date) {
-    return res.status(400).json({ error: 'Missing required query parameters: origin, destination, date' });
+    return res.status(400).json({
+      error: 'Missing required query parameters: origin, destination, date',
+    });
   }
 
   try {
@@ -18,8 +30,8 @@ export default async function handler(req, res) {
       originLocationCode: origin,
       destinationLocationCode: destination,
       departureDate: date,
-      adults: adult,
-      children: child,
+      adults: adult || 1,
+      children: child || 0,
       max: 8,
       currencyCode,
     });
@@ -30,7 +42,7 @@ export default async function handler(req, res) {
     let errData = error.response?.body;
     try {
       errData = JSON.parse(errData);
-    } catch { }
+    } catch {}
     res.status(500).json({ error: errData || 'Internal Server Error' });
   }
 }
