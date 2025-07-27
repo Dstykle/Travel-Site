@@ -88,7 +88,7 @@ function initSearch() {
   const searchInput = document.querySelector('.search-input');
 
   if (!searchContainer || !searchTrigger) return;
-
+/*
   // Open search
   searchTrigger.addEventListener('click', function(e) {
     e.preventDefault();
@@ -105,7 +105,7 @@ function initSearch() {
       closeSearchFn();
     });
   }
-
+*/
   // Close when clicking outside
   document.addEventListener('click', function(e) {
     if (!e.target.closest('.search-container') && searchContainer.classList.contains('active')) {
