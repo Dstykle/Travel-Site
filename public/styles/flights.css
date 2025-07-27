@@ -2,23 +2,33 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 10px;
+    gap: 6px;
     flex-wrap: nowrap; /* Prevent wrapping */
     max-width: 100%;
     overflow-x: auto; /* Scroll if screen too small */
+    padding-left: 10px;
+    padding-right: 10px;
+    background-color: #657A42;
+    border-radius: 20px;
 }
-
+textarea{
+    background-color: black;
+    color:black
+}
 .flight-form input,
 .flight-form select,
 .flight-form button {
     padding: 10px;
+    margin-bottom: 5px;
     font-size: 16px;
-    border: 1px solid #ccc;
+    border: 1px solid #657A42;
+    border-bottom: 1px solid black;
     border-radius: 5px;
+    background-color: #657A42;
 }
 
 .flight-form button {
-    background-color: #007BFF;
+    background-color: #424242;
     color: white;
     cursor: pointer;
     border: none;
@@ -35,4 +45,9 @@
 
 .flight-form .select-wrapper {
     min-width: 113px; /* For the Materialize wrapper */
+}
+
+.flight-card{
+    padding-left: 20px;
+    padding-left: 20px;
 }
