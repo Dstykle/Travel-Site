@@ -84,42 +84,16 @@ function initMaterialize() {
 function initSearch() {
   const searchContainer = document.querySelector('.search-container');
   const searchTrigger = document.querySelector('.search-trigger');
-  const closeSearch = document.querySelector('.close-search');
   const searchInput = document.querySelector('.search-input');
 
   if (!searchContainer || !searchTrigger) return;
-/*
-  // Open search
-  searchTrigger.addEventListener('click', function(e) {
-    e.preventDefault();
-    e.stopPropagation();
-    searchContainer.classList.add('active');
-    if (searchInput) searchInput.focus();
-  });
 
-  // Close search
-  if (closeSearch) {
-    closeSearch.addEventListener('click', function(e) {
-      e.preventDefault();
-      e.stopPropagation();
-      closeSearchFn();
-    });
-  }
-*/
   // Close when clicking outside
   document.addEventListener('click', function(e) {
     if (!e.target.closest('.search-container') && searchContainer.classList.contains('active')) {
       closeSearchFn();
     }
   });
-
-  // Close on ESC
-  document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape' && searchContainer.classList.contains('active')) {
-      closeSearchFn();
-    }
-  });
-
   function closeSearchFn() {
     searchContainer.classList.remove('active');
     if (searchInput) searchInput.value = '';

@@ -59,3 +59,20 @@ document.getElementById('flightForm').addEventListener('submit', async function 
     }
   }
 });
+// Populate Adults and Children dropdowns
+const adultSelect = document.getElementById('adult');
+const childSelect = document.getElementById('child');
+
+for (let i = 1; i <= 20; i++) {
+    const option = document.createElement('option');
+    option.value = i;
+    option.textContent = i;
+    adultSelect.appendChild(option);
+}
+
+for (let i = 0; i <= 20; i++) {
+    const option = document.createElement('option');
+    option.value = i;
+    option.textContent = i;
+    childSelect.appendChild(option);
+}

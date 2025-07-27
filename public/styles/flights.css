@@ -1,16 +1,28 @@
-
-
 .flight-form {
-    
-    padding-right: 100px;
-    padding-left: 100px;
-    margin: 40px;
-
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin: 20px auto;
 }
 
-.flight-card {
-    border: 1px solid #ccc;
+.flight-form input,
+.flight-form select,
+.flight-form button {
     padding: 10px;
-    margin-bottom: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
     border-radius: 5px;
+}
+
+.flight-form button {
+    background-color: #007BFF;
+    color: white;
+    cursor: pointer;
+    border: none;
+}
+
+.flight-form button:hover {
+    background-color: #0056b3;
 }
