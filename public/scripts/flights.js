@@ -12,11 +12,7 @@ document.getElementById('flightForm').addEventListener('submit', async function 
     resultsDiv.innerHTML = '<p>Enter more than 1 passenger</p>';
   }
   else{
-    try {/*
-          //Local path
-      
-      console.log("http://localhost:3001/search?origin=" + origin + "&destination=" + destination + "&date=" + date + "&adults=" + adult + "&children=" + child + "&currencyCode=USD")
-      */
+    try {
       //Online path
       const response = await fetch(`http://localhost:3001/search?origin=${origin}&destination=${destination}&date=${date}&adults=${adult}&children=${child}&currencyCode=USD`);
       
