@@ -10,15 +10,17 @@ export default async function handler(req, res) {
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
-  const {
-    origin,
-    destination,
-    date,
-    adult = 1,
-    child = 0,
-    currencyCode = 'USD',
-  } = req.query;
+const {
+  origin,
+  destination,
+  date,
+  adult,
+  child,
+  currencyCode = 'USD',
+} = req.query;
 
+const adultsCount = parseInt(adult, 10) || 1;
+ const childrenCount = parseInt(child, 10) || 0;
   if (!origin || !destination || !date) {
     return res.status(400).json({
       error: 'Missing required query parameters: origin, destination, date',
@@ -30,8 +32,8 @@ export default async function handler(req, res) {
       originLocationCode: origin,
       destinationLocationCode: destination,
       departureDate: date,
-      adults: adult || 1,
-      children: child || 0,
+      adults: adultsCount,
+      children: childrenCount,
       max: 8,
       currencyCode,
     });

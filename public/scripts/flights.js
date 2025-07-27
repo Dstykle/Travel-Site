@@ -1,3 +1,23 @@
+document.addEventListener('DOMContentLoaded', () => {
+    const adultSelect = document.getElementById('adult');
+    const childSelect = document.getElementById('child');
+
+    // Populate Adults (1-20)
+    for (let i = 1; i <= 20; i++) {
+        const option = document.createElement('option');
+        option.value = i;
+        option.textContent = i;
+        adultSelect.appendChild(option);
+    }
+
+    // Populate Children (0-20)
+    for (let i = 0; i <= 20; i++) {
+        const option = document.createElement('option');
+        option.value = i;
+        option.textContent = i;
+        childSelect.appendChild(option);
+    }
+});
 document.getElementById('flightForm').addEventListener('submit', async function (e) {
   e.preventDefault();
 
@@ -12,15 +32,16 @@ document.getElementById('flightForm').addEventListener('submit', async function 
     resultsDiv.innerHTML = '<p>Enter more than 1 passenger</p>';
   }
   else{
-    try {/*
+    try {
           //Local path
+
+      console.log(child)
+      console.log(adult)
       const response = await fetch(`http://localhost:3001/search?origin=${origin}&destination=${destination}&date=${date}&adults=${adult}&children=${child}&currencyCode=USD`);
-      console.log("http://localhost:3001/search?origin=" + origin + "&destination=" + destination + "&date=" + date + "&adults=" + adult + "&children=" + child + "&currencyCode=USD")
-      */
+      /*
       //Online path
       const response = await fetch(`/api/search?origin=${origin}&destination=${destination}&date=${date}&adults=${adult}&children=${child}&currencyCode=USD`);
-      
-
+      */
       if (!response.ok) throw new Error('Flight search failed');
 
       const data = await response.json();
@@ -59,20 +80,3 @@ document.getElementById('flightForm').addEventListener('submit', async function 
     }
   }
 });
-// Populate Adults and Children dropdowns
-const adultSelect = document.getElementById('adult');
-const childSelect = document.getElementById('child');
-
-for (let i = 1; i <= 20; i++) {
-    const option = document.createElement('option');
-    option.value = i;
-    option.textContent = i;
-    adultSelect.appendChild(option);
-}
-
-for (let i = 0; i <= 20; i++) {
-    const option = document.createElement('option');
-    option.value = i;
-    option.textContent = i;
-    childSelect.appendChild(option);
-}
