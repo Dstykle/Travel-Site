@@ -32,16 +32,16 @@ document.getElementById('flightForm').addEventListener('submit', async function 
     resultsDiv.innerHTML = '<p>Enter more than 1 passenger</p>';
   }
   else{
-    try {
+    try {/*
           //Local path
 
       console.log(child)
       console.log(adult)
       const response = await fetch(`http://localhost:3001/search?origin=${origin}&destination=${destination}&date=${date}&adults=${adult}&children=${child}&currencyCode=USD`);
-      /*
+      */
       //Online path
       const response = await fetch(`/api/search?origin=${origin}&destination=${destination}&date=${date}&adults=${adult}&children=${child}&currencyCode=USD`);
-      */
+      
       if (!response.ok) throw new Error('Flight search failed');
 
       const data = await response.json();
