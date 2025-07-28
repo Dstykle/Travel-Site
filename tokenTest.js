@@ -8,8 +8,8 @@ async function getAccessToken() {
     },
     body: new URLSearchParams({
       grant_type: 'client_credentials',
-      client_id: 'gFDW6b5v702huiCu58g2GSoWt80J7AgV',
-      client_secret: '7sZIWe3JDQrkr5Oq'
+    client_id: 'CLIENTCODE',
+      client_secret: 'CLIENTCODE'
     })
   });
 
