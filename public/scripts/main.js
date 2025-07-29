@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', function() {
 document.addEventListener('DOMContentLoaded', function() {
   // Load the header only if it doesn't already exist
   if (!document.querySelector('header')) {
-    fetch('/components/Dheader.html')
+    fetch('components/Dheader.html')
       .then(response => {
         if (!response.ok) {
           throw new Error('Network response was not ok');

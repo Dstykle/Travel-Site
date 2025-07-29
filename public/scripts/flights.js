@@ -1,4 +1,16 @@
 document.addEventListener('DOMContentLoaded', () => {
+              var elems = document.querySelectorAll('select');
+            var instances = M.FormSelect.init(elems);
+            
+            // Initialize sidenav
+            var sidenavElems = document.querySelectorAll('.sidenav');
+            var sidenavInstances = M.Sidenav.init(sidenavElems, {
+                edge: 'right'
+            });
+            
+            // Set minimum date to today
+            var today = new Date().toISOString().split('T')[0];
+            document.getElementById('date').setAttribute('min', today);
     const adultSelect = document.getElementById('adult');
     const childSelect = document.getElementById('child');
 
@@ -21,6 +33,7 @@ document.addEventListener('DOMContentLoaded', () => {
 document.getElementById('flightForm').addEventListener('submit', async function (e) {
   e.preventDefault();
 
+  
   const origin = document.getElementById('origin').value.toUpperCase();
   const destination = document.getElementById('destination').value.toUpperCase();
   const date = document.getElementById('date').value;
@@ -32,16 +45,15 @@ document.getElementById('flightForm').addEventListener('submit', async function 
     resultsDiv.innerHTML = '<p>Enter more than 1 passenger</p>';
   }
   else{
-    try {/*
+    document.getElementById('loading').classList.add('show');
+  document.getElementById('results').innerHTML = '';
+    try {
           //Local path
-
-      console.log(child)
-      console.log(adult)
-      const response = await fetch(`http://localhost:3001/search?origin=${origin}&destination=${destination}&date=${date}&adults=${adult}&children=${child}&currencyCode=USD`);
-      */
+      const response = await fetch(`http://localhost:3000/search?origin=${origin}&destination=${destination}&date=${date}&adults=${adult}&children=${child}&currencyCode=USD`);
+      /*
       //Online path
       const response = await fetch(`/api/search?origin=${origin}&destination=${destination}&date=${date}&adults=${adult}&children=${child}&currencyCode=USD`);
-      
+      */
       if (!response.ok) throw new Error('Flight search failed');
 
       const data = await response.json();
@@ -50,9 +62,17 @@ document.getElementById('flightForm').addEventListener('submit', async function 
         resultsDiv.innerHTML = '<p>No flights found.</p>';
         return;
       }
+      
+      document.getElementById('loading').classList.remove('show');
 
-      resultsDiv.innerHTML = '<h2>Results:</h2>';
-
+      document.getElementById('results').innerHTML = `
+                    <div class="flight-card">
+                        <h5 style="color: #657A42; margin-bottom: 15px;">
+                            <i class="fas fa-plane" style="margin-right: 10px;"></i>
+                            Flight Results
+                        </h5>
+                    </div>
+                `;
       data.forEach(offer => {
         const itinerary = offer.itineraries[0];
         const firstSegment = itinerary.segments[0];

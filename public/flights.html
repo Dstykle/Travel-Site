@@ -6,49 +6,138 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Flight Search</title>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css2?family=Trebuchet+MS&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-    <link rel="stylesheet" href="styles/flights.css">
     <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/flights.css">
 </head>
 
 <body>
-<!--
-    <h1 class="center-align">Flight Search</h1>
+    <!-- Animated background -->
+    <div class="bg-animation">
+        <div class="cloud cloud1"></div>
+        <div class="cloud cloud2"></div>
+        <div class="cloud cloud3"></div>
+    </div>
+
+    <!-- Header -->
+    <header>
+        <!-- Fixed Navigation Bar -->
+        <div class="top-navbar-fixed">
+            <nav class="top-nav">
+                <div class="nav-wrapper nav-color">
+                    <div class="container">
+                        <a href="index.html" class="brand-logo left white-text">TravelSpiria</a>
+                        <ul class="right hide-on-med-and-down">
+                            <li><a href="index.html#Destinations" class="white-text">Destinations</a></li>
+                            <li><a href="shop.html" class="white-text">Shop</a></li>
+                            <li><a href="index.html" class="white-text">About us</a></li>
+                            <li><a href="contact.html" class="white-text">Contact</a></li>
+                            <li>
+                                <a class="search-trigger waves-effect waves-light white-text" href="flights.html">
+                                    <i class="material-icons">search</i>
+                                </a>
+                            </li>
+                        </ul>
+                        <a href="#" data-target="mobile-demo" class="sidenav-trigger right white-text"><i class="material-icons">menu</i></a>
+                    </div>
+                </div>
+            </nav>
+        </div>
+
+        <!-- Right Side Navigation -->
+        <ul class="sidenav right-aligned" id="mobile-demo">
+            <!-- Search Bar -->
+            <li>
+                <div class="search-container">
+                    <div class="nav-wrapper">
+                        <form>
+                            <div class="input-field">
+                                <input id="search" type="search" placeholder="Search..." required>
+                                <label class="label-icon" for="search"><i class="material-icons">search</i></label>
+                                <i class="material-icons close">close</i>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </li>
+            
+            <li><div class="divider"></div></li>
+            
+            <!-- Navigation Links -->
+            <li><a href="index.html" class="waves-effect"><i class="material-icons">info</i>About us</a></li>
+            <li><a href="shop.html" class="waves-effect"><i class="material-icons">shopping_bag</i>Shop</a></li>
+            <li><a href="destination-1.html" class="waves-effect"><i class="material-icons">collections</i>Sicily</a></li>
+            <li><a href="destination-2.html" class="waves-effect"><i class="material-icons">collections</i>Athens</a></li>
+            <li><a href="flights.html" class="waves-effect"><i class="material-symbols-outlined">plane_contrails</i>Lookup Flights</a></li>
+            <li><a href="contact.html" class="waves-effect"><i class="material-icons">email</i>Contact</a></li>
+            
+            <li><div class="divider"></div></li>
+            
+            <li><a href="#!" class="waves-effect"><i class="material-icons">settings</i>Settings</a></li>
+            <li><a href="#!" class="waves-effect"><i class="material-icons">help</i>Help</a></li>
+        </ul>
+    </header>
+
+    <h1><i class="fas fa-plane" style="margin-right: 15px;"></i>Find your next flight...</h1>
+
     <form class="flight-form" id="flightForm">
-        <label>From: <input type="text" id="origin" required /></label><br /><br />
-        <label>To: <input type="text" id="destination" required /></label><br /><br />
-        <label>How many adults: <input type="number" min="0" id="adult" required /></label><br /><br />
-        <label>How many children: <input type="number" min="0" id="child" required /></label><br /><br />
-        <label>Date: <input type="date" id="date" required /></label><br /><br />
-        <button type="submit">Search</button>
-    </form>-->
-<h1 class="center-align">Flight Search</h1>
+        <div class="input-group">
+            <i class="fas fa-plane-departure"></i>
+            <input type="text" id="origin" placeholder="From" required />
+        </div>
 
-<form class="flight-form" id="flightForm">
-    <input type="text" id="origin" placeholder="From" required />
-    <input type="text" id="destination" placeholder="To" required />
+        <div class="input-group">
+            <i class="fas fa-plane-arrival"></i>
+            <input type="text" id="destination" placeholder="To" required />
+        </div>
 
-    <select id="adult" required>
-        <option value="" disabled selected>Adults</option>
-    </select>
+        <div class="input-group">
+            <i class="fas fa-user"></i>
+            <select id="adult" required>
+                <option value="" disabled selected>Adults</option>
+                <option value="1">1 Adult</option>
+                <option value="2">2 Adults</option>
+                <option value="3">3 Adults</option>
+                <option value="4">4 Adults</option>
+                <option value="5">5 Adults</option>
+                <option value="6">6 Adults</option>
+            </select>
+        </div>
 
-    <select id="child">
-        <option value="0" selected>Children</option>
-    </select>
+        <div class="input-group">
+            <i class="fas fa-child"></i>
+            <select id="child">
+                <option value="0" selected>No Children</option>
+                <option value="1">1 Child</option>
+                <option value="2">2 Children</option>
+                <option value="3">3 Children</option>
+                <option value="4">4 Children</option>
+            </select>
+        </div>
 
-    <input type="date" id="date" required />
-    <button type="submit">Search</button>
-</form>
+        <div class="input-group">
+            <i class="fas fa-calendar-alt"></i>
+            <input type="date" id="date" required />
+        </div>
 
-<div id="results"></div>
+        <button type="submit" class="search-btn">
+            <i class="fas fa-search" style="margin-right: 8px;"></i>Search
+        </button>
+    </form>
 
-    <footer data-include="/components/Dfooter.html"></footer>
-    <script src="scripts/HTMLInclude.min.js"></script>
+    <div class="loading" id="loading">
+        <div class="spinner"></div>
+        <div class="loading-text">Searching for flights...</div>
+    </div>
+
+    <div id="results"></div>
+
+    <footer data-include="components/Dfooter.html"></footer>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="scripts/HTMLInclude.min.js"></script>
     <script src="scripts/flights.js"></script>
-    <script src="scripts/main.js"></script>
 </body>
-
 </html>
