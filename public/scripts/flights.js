@@ -47,13 +47,13 @@ document.getElementById('flightForm').addEventListener('submit', async function 
   else{
     document.getElementById('loading').classList.add('show');
   document.getElementById('results').innerHTML = '';
-    try {
+    try {/*
           //Local path
       const response = await fetch(`http://localhost:3000/search?origin=${origin}&destination=${destination}&date=${date}&adults=${adult}&children=${child}&currencyCode=USD`);
-      /*
+      */
       //Online path
       const response = await fetch(`/api/search?origin=${origin}&destination=${destination}&date=${date}&adults=${adult}&children=${child}&currencyCode=USD`);
-      */
+      
       if (!response.ok) throw new Error('Flight search failed');
 
       const data = await response.json();
