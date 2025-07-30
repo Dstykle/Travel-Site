@@ -361,8 +361,13 @@
             display: flex;
             flex-direction: column;
             min-width: 160px;
+            
         }
-
+        .manual-group{
+            background-color:white;
+            padding-left:45px;
+            border-radius:20px;
+        }
         .input-group i {
             position: absolute;
             left: 15px;
