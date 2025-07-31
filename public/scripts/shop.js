@@ -28,18 +28,19 @@ function updateCart() {
     // Save cart to localStorage
     localStorage.setItem('cart', JSON.stringify(cart));
 
-    // Update cart count in navbar if element exists
-    const cartCount = document.getElementById('cart-count');
-    if (cartCount) {
-        const totalItems = cart.reduce((total, item) => total + item.quantity, 0);
-        cartCount.textContent = totalItems;
-    }
+    // Update all cart count badges
+    const cartCountBadges = document.querySelectorAll('.cart-count');
+    const totalItems = cart.reduce((total, item) => total + item.quantity, 0);
+    cartCountBadges.forEach(badge => {
+        badge.textContent = totalItems;
+    });
 
     // Update cart modal if it exists
     const cartItemsContainer = document.getElementById('cart-items');
     if (cartItemsContainer) {
         if (cart.length === 0) {
             cartItemsContainer.innerHTML = '<p class="empty-cart-message">Your cart is empty</p>';
+            document.getElementById('cart-total').textContent = "0.00";
             return;
         }
 
@@ -81,6 +82,7 @@ function updateCart() {
         document.getElementById('cart-total').textContent = total.toFixed(2);
     }
 }
+
 
 // Quantity control functions
 function decreaseQuantity(event) {
