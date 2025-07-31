@@ -16,7 +16,6 @@ body {
 .nav-color{
     background-color: #657A42;
 }
-
 .bottom-nav {
     position: fixed;
     bottom: 0;
@@ -228,5 +227,8 @@ nav .brand-logo.left{
 
 /* Hamburger icon color */
 .sidenav-trigger i {
-  color: #333;
+  color: white;
+}
+a.modal-trigger.sidenav-trigger.right{
+  margin: 0px 0px 0px;
 }
