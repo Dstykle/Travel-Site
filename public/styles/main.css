@@ -211,10 +211,12 @@ nav .brand-logo.left{
 /* Menu item styling */
 .sidenav li>a {
   padding: 0 16px;
+  color:white;
 }
 
 .sidenav li>a>i.material-icons {
   margin-right: 16px;
+  color:white;
 }
 
 /* Brand logo styling */

@@ -14,7 +14,23 @@ document.addEventListener('DOMContentLoaded', function() {
     document.body.style.opacity = 1;
 });
 
+  document.addEventListener('DOMContentLoaded', function () {
+    // Init Materialize dropdown (desktop)
+    const dropdowns = document.querySelectorAll('.dropdown-trigger');
+    M.Dropdown.init(dropdowns, {
+      coverTrigger: false,
+      constrainWidth: false,
+    });
+  });
 
+  // Custom toggle for mobile submenu
+  function toggleSubmenu(event, submenuId) {
+    event.preventDefault();
+    const submenu = document.getElementById(submenuId);
+    if (submenu) {
+      submenu.style.display = submenu.style.display === 'none' ? 'block' : 'none';
+    }
+  }
 document.addEventListener('DOMContentLoaded', function() {
   // Load the header only if it doesn't already exist
   if (!document.querySelector('header')) {
@@ -61,6 +77,13 @@ function initMaterialize() {
     draggable: true
   });
 
+  // ✅ Initialize dropdowns (after header is loaded)
+  const dropdowns = document.querySelectorAll('.dropdown-trigger');
+  M.Dropdown.init(dropdowns, {
+    coverTrigger: false,
+    constrainWidth: false,
+  });
+
   // Initialize search functionality in sidenav
   const searchInput = document.getElementById('search');
   if (searchInput) {
@@ -71,7 +94,7 @@ function initMaterialize() {
     });
 
     // Close icon functionality
-    const closeIcon = searchInput.nextElementSibling.querySelector('.close');
+    const closeIcon = searchInput.nextElementSibling?.querySelector('.close');
     if (closeIcon) {
       closeIcon.addEventListener('click', function() {
         searchInput.value = '';

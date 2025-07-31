@@ -372,6 +372,9 @@
             padding-left:45px;
             border-radius:20px;
         }
+        .manual-group-text{
+            top:3px;
+        }
         .input-group i {
             position: absolute;
             left: 15px;
@@ -381,7 +384,9 @@
             font-size: 18px;
             z-index: 2;
         }
-
+        footer.page-footer {
+    margin-top: 16vw;
+}
         .flight-form input,
         .flight-form select {
             padding: 15px 15px 15px 50px;
