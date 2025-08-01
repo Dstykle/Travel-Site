@@ -1,3 +1,13 @@
+// Import the Amadeus SDK for Node.js
+import Amadeus from 'amadeus';
+
+// Create an instance of the Amadeus client using environment variables
+const amadeus = new Amadeus({
+  clientId: process.env.AMADEUS_CLIENT_ID,
+  clientSecret: process.env.AMADEUS_CLIENT_SECRET,
+});
+
+// API route handler
 export default async function handler(req, res) {
   if (req.method !== 'GET') {
     return res.status(405).json({ error: 'Method not allowed' });
