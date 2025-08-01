@@ -9,7 +9,7 @@ const amadeus = new Amadeus({
 
 // Define the API route handler for flight offer search
 export default async function handler(req, res) {
-  // Only allow GET requests
+  //GET requests
   if (req.method !== 'GET') {
     return res.status(405).json({ error: 'Method not allowed' });
   }

@@ -55,11 +55,8 @@ function isValidIataCode(code) {
 
 document.getElementById('flightForm').addEventListener('submit', async function (e) {
     e.preventDefault();
-
-    const originInput = document.getElementById('origin').value;
-    const destinationInput = document.getElementById('destination').value;
-    const origin = originInput.toUpperCase();
-    const destination = destinationInput.toUpperCase();
+    const origin = document.getElementById('origin').value.toUpperCase();
+    const destination = document.getElementById('destination').value.toUpperCase();
     const date = document.getElementById('date').value;
     const child = parseInt(document.getElementById('child').value);
     const adult = parseInt(document.getElementById('adult').value);
@@ -72,12 +69,13 @@ document.getElementById('flightForm').addEventListener('submit', async function 
         console.log('First IATA code:', iataCodes[0]);
         return;
     }
-
+    if(origin === destination){
+      resultsDiv.innerHTML = '<p style="color:white">Cannot Travel From and To the same place.</p>';
+      return;
+    }
     const validOrigin = isValidIataCode(origin);
     const validDestination = isValidIataCode(destination);
 
-    console.log(validDestination);
-    console.log(validOrigin);
     if (!validOrigin || !validDestination) {
       document.getElementById('loading').classList.remove('show');
         resultsDiv.innerHTML =
@@ -152,6 +150,7 @@ close
 
     } catch (err) {
         console.error(err);
+        document.getElementById('loading').classList.remove('show');
         resultsDiv.innerHTML = '<p>Error retrieving flight data.</p>';
     }
 });
