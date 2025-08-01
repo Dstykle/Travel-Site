@@ -1,13 +1,3 @@
-// Import the Amadeus SDK for Node.js
-import Amadeus from 'amadeus';
-
-// Create an instance of the Amadeus client using environment variables
-const amadeus = new Amadeus({
-  clientId: process.env.AMADEUS_CLIENT_ID,
-  clientSecret: process.env.AMADEUS_CLIENT_SECRET,
-});
-
-// API route handler
 export default async function handler(req, res) {
   if (req.method !== 'GET') {
     return res.status(405).json({ error: 'Method not allowed' });
@@ -17,16 +7,14 @@ export default async function handler(req, res) {
     origin,
     destination,
     date,
-    adult,
-    child,
+    adults,
+    children,
     currencyCode = 'USD',
   } = req.query;
 
-  // Safely convert to numbers
-  const adults = Number.isNaN(Number(adult)) ? 1 : Number(adult);
-  const children = Number.isNaN(Number(child)) ? 0 : Number(child);
+  const adultCount = Number.isNaN(Number(adults)) ? 1 : Number(adults);
+  const childCount = Number.isNaN(Number(children)) ? 0 : Number(children);
 
-  // Validate required fields
   if (!origin || !destination || !date) {
     return res.status(400).json({
       error: 'Missing required query parameters: origin, destination, date',
@@ -38,8 +26,8 @@ export default async function handler(req, res) {
       originLocationCode: origin.toUpperCase(),
       destinationLocationCode: destination.toUpperCase(),
       departureDate: date,
-      adults,
-      children,
+      adults: adultCount,
+      children: childCount,
       max: 8,
       currencyCode,
     });
