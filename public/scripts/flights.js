@@ -110,8 +110,10 @@ close
         const response = await fetch(searchUrl);
         if (!response.ok) {
             const errorData = await response.json();
-            console.error('API Error:', errorData);
-            throw new Error(`Flight search failed: ${response.status}`);
+            console.error('API Error Details:', errorData);
+            document.getElementById('loading').classList.remove('show');
+            resultsDiv.innerHTML = `<p style="color:white">API Error: ${errorData.error || 'Unknown error'}<br>Details: ${JSON.stringify(errorData.details, null, 2)}</p>`;
+            return;
         }
 
         const data = await response.json();
