@@ -25,8 +25,8 @@ export default async function handler(req, res) {
   } = req.query;
 
   // Parse passenger counts and fallback to defaults if not provided
-  const adultsCount = parseInt(adult, 10) || 1;
-  const childrenCount = parseInt(child, 10) || 0;
+  const adultsCount = parseInt(adult);
+  const childrenCount = parseInt(child);
 
   // Validate required parameters
   if (!origin || !destination || !date) {
