@@ -118,15 +118,16 @@
     <!-- Flight Search Form -->
     <form class="flight-form" id="flightForm">
         <!-- Origin Airport -->
+
         <div class="input-group manual-group">
             <i class="fas fa-plane-departure" style="top:50% !important"></i>
-            <input type="text" id="origin" placeholder="From" style="margin-left:-5px;" required />
+            <input type="text" id="origin" placeholder="From (IATA Code)" style="margin-left:-5px;" pattern="[A-Za-z]{3}" maxlength='3' required />
         </div>
 
         <!-- Destination Airport -->
         <div class="input-group manual-group">
             <i class="fas fa-plane-arrival" style="top:50% !important"></i>
-            <input type="text" id="destination" placeholder="To" style="margin-left:-5px;" required />
+            <input type="text" id="destination" placeholder="To (IATA Code)" style="margin-left:-5px;" pattern="[A-Za-z]{3}" maxlength='3' required />
         </div>
 
         <!-- Adult Passenger Count -->
@@ -162,11 +163,12 @@
         </div>
 
         <!-- Submit Button -->
-        <button type="submit" class="search-btn">
+        <button type="submit" class="search-btn" id="checkBtn">
             <i class="fas fa-search" style="margin-right: 8px;"></i>Search
         </button>
-    </form>
 
+<p id="error-msg" style="color:red;"></p>
+    </form>
     <!-- Loading Indicator -->
     <div class="loading" id="loading">
         <div class="spinner"></div>
