@@ -57,10 +57,12 @@ document.getElementById('flightForm').addEventListener('submit', async function 
     const origin = document.getElementById('origin').value.toUpperCase();
     const destination = document.getElementById('destination').value.toUpperCase();
     const date = document.getElementById('date').value;
-    const child = parseInt(document.getElementById('child').value);
-    const adult = parseInt(document.getElementById('adult').value);
+    const child = parseInt(document.getElementById('child').value) || 0;  // Added fallback
+    const adult = parseInt(document.getElementById('adult').value) || 1;  // Added fallback
     const resultsDiv = document.getElementById('results');
     const errorMsg = document.getElementById('error-msg');
+
+    console.log('Form values:', { origin, destination, date, adult, child }); // Debug log
 
     // Wait for IATA codes to load if they aren't yet
     if (iataCodes.length === 0) {
@@ -68,10 +70,12 @@ document.getElementById('flightForm').addEventListener('submit', async function 
         console.log('First IATA code:', iataCodes[0]);
         return;
     }
+    
     if(origin === destination){
       resultsDiv.innerHTML = '<p style="color:white">Cannot Travel From and To the same place.</p>';
       return;
     }
+    
     const validOrigin = isValidIataCode(origin);
     const validDestination = isValidIataCode(destination);
 
@@ -88,10 +92,27 @@ close
 
     document.getElementById('loading').classList.add('show');
     resultsDiv.innerHTML = '';
-/***Flight search fetching ****/
+
+    // Build the URL with proper parameter names and values
+    const searchParams = new URLSearchParams({
+        origin: origin,
+        destination: destination,
+        date: date,
+        adults: adult.toString(),      // Make sure it's a string
+        children: child.toString(),    // Make sure it's a string
+        currency: 'USD'
+    });
+
+    const searchUrl = `/api/search?${searchParams.toString()}`;
+    console.log('Search URL:', searchUrl); // Debug log
+
     try {
-        const response = await fetch(`/api/search?origin=${origin}&destination=${destination}&date=${date}&adults=${adult}&children=${child}&currency=USD`);
-        if (!response.ok) throw new Error('Flight search failed');
+        const response = await fetch(searchUrl);
+        if (!response.ok) {
+            const errorData = await response.json();
+            console.error('API Error:', errorData);
+            throw new Error(`Flight search failed: ${response.status}`);
+        }
 
         const data = await response.json();
         if (data.length === 0) {
@@ -148,8 +169,8 @@ close
         });
 
     } catch (err) {
-        console.error(err);
+        console.error('Fetch error:', err);
         document.getElementById('loading').classList.remove('show');
-        resultsDiv.innerHTML = '<p>Error retrieving flight data.</p>';
+        resultsDiv.innerHTML = '<p>Error retrieving flight data. Please try again.</p>';
     }
 });
