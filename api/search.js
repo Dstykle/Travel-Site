@@ -7,26 +7,26 @@ const amadeus = new Amadeus({
   clientSecret: process.env.AMADEUS_CLIENT_SECRET,
 });
 
-// Define the API route handler for flight offer search
+// API route handler
 export default async function handler(req, res) {
-  //GET requests
   if (req.method !== 'GET') {
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
-  // Destructure query parameters from the request
   const {
-    origin,        // IATA code for origin airport
-    destination,   // IATA code for destination airport 
-    date,          // Departure date in YYYY-MM-DD format
-    adult,     // Number of adult passengers
-    child,         // Number of child passengers
-    currencyCode = 'USD', // currency for prices, default to USD
+    origin,
+    destination,
+    date,
+    adult,
+    child,
+    currencyCode = 'USD',
   } = req.query;
 
-  const adults = parseInt(adult, 10);
-  const children = parseInt(child, 10);
-  // Validate required parameters
+  // Safely convert to numbers
+  const adults = Number.isNaN(Number(adult)) ? 1 : Number(adult);
+  const children = Number.isNaN(Number(child)) ? 0 : Number(child);
+
+  // Validate required fields
   if (!origin || !destination || !date) {
     return res.status(400).json({
       error: 'Missing required query parameters: origin, destination, date',
@@ -34,32 +34,25 @@ export default async function handler(req, res) {
   }
 
   try {
-    // Call Amadeus API to search for flight offers with provided parameters
     const response = await amadeus.shopping.flightOffersSearch.get({
-      originLocationCode: origin,
-      destinationLocationCode: destination,
+      originLocationCode: origin.toUpperCase(),
+      destinationLocationCode: destination.toUpperCase(),
       departureDate: date,
-      adults: adults,
-      children: children,
-      max: 8,              // Limit the number of returned results to 8
-      currencyCode,        // Currency for the returned prices
+      adults,
+      children,
+      max: 8,
+      currencyCode,
     });
 
-    // Return the retrieved flight offer data in JSON format
     res.status(200).json(response.data);
-
   } catch (error) {
-    // Log error details for debugging
     console.error('Amadeus error:', error.response?.body || error.message || error);
 
-    // Try to parse the error body if it's a JSON string
     let errData = error.response?.body;
     try {
       errData = JSON.parse(errData);
     } catch {}
 
-    // Return an error response to the client
     res.status(500).json({ error: errData || 'Internal Server Error' });
   }
 }
-
