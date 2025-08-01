@@ -19,18 +19,13 @@ export default async function handler(req, res) {
     origin,        // IATA code for origin airport
     destination,   // IATA code for destination airport 
     date,          // Departure date in YYYY-MM-DD format
-    adult,         // Number of adult passengers
+    adult,     // Number of adult passengers
     child,         // Number of child passengers
     currencyCode = 'USD', // currency for prices, default to USD
   } = req.query;
 
-  // Parse passenger counts and fallback to defaults if not provided
-  const adultsCount = adult;
-  const childrenCount = child;
-  console.log(adult);
-  console.log(child);
-  console.log(childrenCount);
-  console.log(adultsCount);
+  const adults = parseInt(adult, 10);
+  const children = parseInt(child, 10);
   // Validate required parameters
   if (!origin || !destination || !date) {
     return res.status(400).json({
@@ -44,8 +39,8 @@ export default async function handler(req, res) {
       originLocationCode: origin,
       destinationLocationCode: destination,
       departureDate: date,
-      adults: adultsCount,
-      children: childrenCount,
+      adults: adults,
+      children: children,
       max: 8,              // Limit the number of returned results to 8
       currencyCode,        // Currency for the returned prices
     });
