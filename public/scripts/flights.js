@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
     M.FormSelect.init(adultSelect);
     M.FormSelect.init(childSelect);
 
-    //Fetch IATA codes ONCE on load
+    //Fetch IATA codes on load
     fetchIataCodes();
 });
 
@@ -36,7 +36,7 @@ function formatDateTime(dateTimeString) {
 }
 
 let iataCodes = [];
-//API to fetch and use IATA codes for validation
+/******API to fetch and use IATA codes for validation******/
 async function fetchIataCodes() {
   try {
     const response = await fetch('/api/iata');
@@ -46,13 +46,12 @@ async function fetchIataCodes() {
     console.error('Failed to fetch IATA codes:', error);
   }
 }
-
-
+/***Validation code *****/
 function isValidIataCode(code) {
     const formatted = code.trim().toUpperCase();
     return iataCodes.some(entry => entry.code === formatted);
 }
-
+/***Function when form is submitted *****/
 document.getElementById('flightForm').addEventListener('submit', async function (e) {
     e.preventDefault();
     const origin = document.getElementById('origin').value.toUpperCase();
@@ -89,7 +88,7 @@ close
 
     document.getElementById('loading').classList.add('show');
     resultsDiv.innerHTML = '';
-
+/***Flight search fetching ****/
     try {
         const response = await fetch(`/api/search?origin=${origin}&destination=${destination}&date=${date}&adults=${adult}&children=${child}&currency=USD`);
         if (!response.ok) throw new Error('Flight search failed');

@@ -16,16 +16,16 @@ export default async function handler(req, res) {
 
   // Destructure query parameters from the request
   const {
-    origin,        // IATA code for origin airport (e.g., "JFK")
-    destination,   // IATA code for destination airport (e.g., "LAX")
+    origin,        // IATA code for origin airport
+    destination,   // IATA code for destination airport 
     date,          // Departure date in YYYY-MM-DD format
     adult,         // Number of adult passengers
     child,         // Number of child passengers
-    currencyCode = 'USD', // Optional: currency for prices, default to USD
+    currencyCode = 'USD', // currency for prices, default to USD
   } = req.query;
 
   // Parse passenger counts and fallback to defaults if not provided
-  const adultsCount = parseInt(adult, 10) || 1;
+  const adultsCount = parseInt(adult, 10) || 3;
   const childrenCount = parseInt(child, 10) || 0;
 
   // Validate required parameters
