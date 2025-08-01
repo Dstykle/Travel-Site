@@ -12,8 +12,14 @@ export default async function handler(req, res) {
     currencyCode = 'USD',
   } = req.query;
 
-  const adultCount = Number.isNaN(Number(adults)) ? 1 : Number(adults);
-  const childCount = Number.isNaN(Number(children)) ? 0 : Number(children);
+  // Debug log
+  console.log('Query:', req.query);
+
+  const adultCountRaw = parseInt(adults, 10);
+  const childCountRaw = parseInt(children, 10);
+
+  const adultCount = Number.isInteger(adultCountRaw) && adultCountRaw > 0 ? adultCountRaw : 1;
+  const childCount = Number.isInteger(childCountRaw) && childCountRaw >= 0 ? childCountRaw : 0;
 
   if (!origin || !destination || !date) {
     return res.status(400).json({
